@@ -1,2 +1,2 @@
 # Drought-Index
-Project to practice reproducible research practices
+A repository for a project to practice reproducible research practices
