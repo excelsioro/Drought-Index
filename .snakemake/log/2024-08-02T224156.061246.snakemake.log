@@ -1,0 +1,33 @@
+Building DAG of jobs...
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count
+-----------------  -------
+get_all_archive          1
+get_all_filenames        1
+get_inventory            1
+get_station_data         1
+targets                  1
+total                    5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Aug  2 22:41:56 2024]
+localrule get_inventory:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd-inventory.txt
+    jobid: 3
+    reason: Missing output files: data/ghcnd-inventory.txt
+    resources: tmpdir=C:\Users\js199\AppData\Local\Temp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule get_inventory in file C:\Users\js199\OneDrive\Desktop\Drought-Index\Snakefile, line 31:
+Job 3  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/ghcnd-inventory.txt (missing locally, parent dir contents: dataREADME.md, ghcnd-stations.txt, ghcnd_all.tar.gz, ghcnd_all_files.txt, index.html)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake\log\2024-08-02T224156.061246.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
