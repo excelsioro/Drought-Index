@@ -28,32 +28,44 @@ library(lubridate)
 # SFLAG31    269-269   Character
 # ------------------------------
 
+tday_julian = yday(today())
+window = 30
 quadruple <- function(x){
 
     c(glue("VALUE{x}"), glue("MFLAG{x}"), glue("QFLAG{x}"), glue("SFLAG{x}"))
 
 }
 
-setwd("C:/Users/js199/OneDrive/Desktop/Drought-Index")
 
 widths <- c(11, 4, 2, 4, rep(c(5, 1, 1, 1), 31))
 headers <- c("ID", "YEAR", "MONTH", "ELEMENT", unlist(map(1:31, quadruple)))
 
-read_fwf("data/ghcnd_cat.gz",
+read_fwf("C:/Users/js199/OneDrive/Desktop/Drought-Index/data/temp/xaa.gz",
          fwf_widths(widths, headers),
          na = c("NA", "-9999"),
          col_types = cols(.default = col_character()),
-         col_select = c(ID, YEAR, MONTH, ELEMENT, starts_with("VALUE")))
-
-    # %>%
+         col_select = c(ID, YEAR, MONTH, ELEMENT, starts_with("VALUE"))) %>%
     rename_all(tolower) %>%
-    filter(element == "PRCP") %>%
-    select(-element) %>% 
     pivot_longer(cols = starts_with("value"),
                  names_to = "day", values_to = "prcp") %>%
     drop_na() %>%
+    filter(prcp != 0) %>%
     mutate(day = str_replace(day, "value", ""),
            date = ymd(glue("{year}-{month}-{day}")),
            prcp = as.numeric(prcp)/100) %>% # prcp now in cm
     select(id, date, prcp) %>%
-    write_tsv("data/composite_dly.tsv")
+    slice_sample(n=1000) -> d
+
+    d %>%
+        mutate(julian_day = yday(date),
+        diff = tday_julian - julian_day,
+        is_in_window = case_when(diff < window & diff > 0 ~ TRUE, 
+                                                 diff > window ~ FALSE,
+                                                 tday_julian < window &
+                                                     diff + 365 < window ~ TRUE,
+                                                 diff < 0 ~ FALSE)) 
+        
+    
+    
+    #%>%
+    #write_tsv("data/composite_dly.tsv")
