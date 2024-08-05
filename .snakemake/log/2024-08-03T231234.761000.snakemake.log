@@ -1,0 +1,31 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+summarize_dly_files        1
+targets                    1
+total                      2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Aug  3 23:12:35 2024]
+localrule summarize_dly_files:
+    input: code/concatenate_dly.bash, code/read_split_dly_files.R, data/ghcnd_all.tar.gz
+    output: data/ghcnd_tidy.tsv.gz
+    jobid: 5
+    reason: Missing output files: data/ghcnd_tidy.tsv.gz
+    resources: tmpdir=/tmp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule summarize_dly_files in file /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/Snakefile, line 56:
+Job 5  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/ghcnd_tidy.tsv.gz (missing locally, parent dir contents: dataREADME.md, ghcnd-inventory.txt, ghcnd-stations.txt, ghcnd_all.tar.gz, ghcnd_all_files.txt, ghcnd_cat.gz, index.html)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-08-03T231234.761000.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
