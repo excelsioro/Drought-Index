@@ -1,0 +1,54 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+get_all_filenames          1
+summarize_dly_files        1
+targets                    1
+total                      3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 14:00:43 2024]
+localrule summarize_dly_files:
+    input: code/concatenate_dly.bash, code/read_split_dly_files.R, data/ghcnd_all.tar.gz
+    output: data/ghcnd_tidy.tsv.gz
+    jobid: 5
+    reason: Missing output files: data/ghcnd_tidy.tsv.gz
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 14:14:51 2024]
+Finished job 5.
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 14:14:51 2024]
+localrule get_all_filenames:
+    input: code/get_ghcnd_all_files.bash, data/ghcnd_all.tar.gz
+    output: data/ghcnd_all_files.txt
+    jobid: 2
+    reason: Updated input files: code/get_ghcnd_all_files.bash
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 14:17:04 2024]
+Finished job 2.
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 14:17:04 2024]
+localrule targets:
+    input: data/ghcnd_all.tar.gz, data/ghcnd_all_files.txt, data/ghcnd-inventory.txt, data/ghcnd-stations.txt, data/ghcnd_tidy.tsv.gz, data/ghcnd_regions_years.tsv
+    jobid: 0
+    reason: Input files updated by another job: data/ghcnd_tidy.tsv.gz, data/ghcnd_all_files.txt
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 14:17:04 2024]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: .snakemake/log/2024-08-06T140042.580395.snakemake.log

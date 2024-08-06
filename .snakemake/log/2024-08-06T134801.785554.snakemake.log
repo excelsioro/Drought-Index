@@ -1,0 +1,47 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+get_all_filenames          1
+get_regions_years          1
+summarize_dly_files        1
+targets                    1
+total                      4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 13:48:02 2024]
+localrule get_regions_years:
+    input: code/get_regions_years.R, data/ghcnd-inventory.txt
+    output: data/ghcnd_regions_years.tsv
+    jobid: 6
+    reason: Missing output files: data/ghcnd_regions_years.tsv
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 13:48:05 2024]
+Finished job 6.
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 13:48:05 2024]
+localrule summarize_dly_files:
+    input: code/concatenate_dly.bash, code/read_split_dly_files.R, data/ghcnd_all.tar.gz
+    output: data/ghcnd_tidy.tsv.gz
+    jobid: 5
+    reason: Updated input files: code/read_split_dly_files.R, code/concatenate_dly.bash
+    resources: tmpdir=/tmp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule summarize_dly_files in file /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/Snakefile, line 57:
+Job 5  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/ghcnd_tidy.tsv.gz (missing locally, parent dir contents: dataREADME.md, ghcnd-inventory.txt, ghcnd-stations.txt, ghcnd_all.tar.gz, ghcnd_all_files.txt, ghcnd_cat.gz, ghcnd_regions.tsv, ghcnd_regions_years.tsv, index.html, temp)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-08-06T134801.785554.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

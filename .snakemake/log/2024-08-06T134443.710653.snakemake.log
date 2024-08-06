@@ -1,0 +1,40 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+get_all_filenames          1
+get_regions_years          1
+summarize_dly_files        1
+targets                    1
+total                      4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 13:44:44 2024]
+localrule get_regions_years:
+    input: code/get_regions_years.R, data/ghcnd-inventory.txt
+    output: data/ghcnd_regions_years.tsv
+    jobid: 6
+    reason: Missing output files: data/ghcnd_regions_years.tsv
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 13:44:45 2024]
+Error in rule get_regions_years:
+    jobid: 6
+    input: code/get_regions_years.R, data/ghcnd-inventory.txt
+    output: data/ghcnd_regions_years.tsv
+    shell:
+        
+        code/get_regions_years.R
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-08-06T134443.710653.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

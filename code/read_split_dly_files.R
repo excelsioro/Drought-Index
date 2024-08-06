@@ -70,9 +70,10 @@ process_xfiles <- function(x) {
         summarize(prcp = sum(prcp), .groups = "drop")
 }
 
-x_files <- list.files("C:/Users/js199/OneDrive/Desktop/Drought-Index/data/temp", full.names = TRUE)
+x_files <- list.files("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/temp", full.names = TRUE)
+
 
 map_dfr(x_files, process_xfiles) %>%
     group_by(id, year) %>%
     summarize(prcp = sum(prcp), .groups = "drop") %>%
-    write_tsv("C:/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_tidy.tsv.gz")
+    write_tsv("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_tidy.tsv.gz")

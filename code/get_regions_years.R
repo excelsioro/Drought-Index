@@ -17,7 +17,7 @@ library(tidyverse)
 # WMO ID       81-85   Character
 # ------------------------------
 
-read_fwf("C:/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd-inventory.txt",
+read_fwf("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd-inventory.txt",
          col_positions = fwf_cols(
            id = c(1, 11),
            latitude = c(13, 20),
@@ -32,5 +32,4 @@ read_fwf("C:/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd-inventory.txt
   group_by(longitude, latitude) %>%
   mutate(region = cur_group_id()) %>%
   select(-element) %>%
-  write_tsv("C:/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_regions_years.tsv")
-
+  write_tsv("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_regions_years.tsv")
