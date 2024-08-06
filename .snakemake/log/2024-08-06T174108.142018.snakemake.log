@@ -1,0 +1,108 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 12
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+get_all_archive            1
+get_all_filenames          1
+get_inventory              1
+get_regions_years          1
+get_station_data           1
+summarize_dly_files        1
+targets                    1
+total                      7
+
+Select jobs to execute...
+Execute 3 jobs...
+
+[Tue Aug  6 17:41:08 2024]
+localrule get_station_data:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd-stations.txt
+    jobid: 2
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+
+[Tue Aug  6 17:41:08 2024]
+localrule get_all_archive:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd_all.tar.gz
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+
+[Tue Aug  6 17:41:08 2024]
+localrule get_inventory:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd-inventory.txt
+    jobid: 1
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 17:41:14 2024]
+Finished job 2.
+1 of 7 steps (14%) done
+[Tue Aug  6 17:41:23 2024]
+Finished job 1.
+2 of 7 steps (29%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 17:41:23 2024]
+localrule get_regions_years:
+    input: code/get_regions_years.R, data/ghcnd-inventory.txt
+    output: data/ghcnd_regions_years.tsv
+    jobid: 6
+    reason: Input files updated by another job: data/ghcnd-inventory.txt
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 17:41:29 2024]
+Finished job 6.
+3 of 7 steps (43%) done
+[Tue Aug  6 17:54:01 2024]
+Finished job 0.
+4 of 7 steps (57%) done
+Select jobs to execute...
+Execute 2 jobs...
+
+[Tue Aug  6 17:54:01 2024]
+localrule get_all_filenames:
+    input: code/get_ghcnd_all_files.bash, data/ghcnd_all.tar.gz
+    output: data/ghcnd_all_files.txt
+    jobid: 4
+    reason: Input files updated by another job: data/ghcnd_all.tar.gz
+    resources: tmpdir=/tmp
+
+
+[Tue Aug  6 17:54:01 2024]
+localrule summarize_dly_files:
+    input: code/concatenate_dly.bash, code/read_split_dly_files.R, data/ghcnd_all.tar.gz
+    output: data/ghcnd_tidy.tsv.gz
+    jobid: 5
+    reason: Input files updated by another job: data/ghcnd_all.tar.gz
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 17:56:32 2024]
+Finished job 4.
+5 of 7 steps (71%) done
+[Tue Aug  6 18:26:38 2024]
+Finished job 5.
+6 of 7 steps (86%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Tue Aug  6 18:26:38 2024]
+localrule targets:
+    input: data/ghcnd_all.tar.gz, data/ghcnd_all_files.txt, data/ghcnd-inventory.txt, data/ghcnd-stations.txt, data/ghcnd_tidy.tsv.gz, data/ghcnd_regions_years.tsv
+    jobid: 3
+    reason: Input files updated by another job: data/ghcnd_regions_years.tsv, data/ghcnd_tidy.tsv.gz, data/ghcnd-stations.txt, data/ghcnd_all.tar.gz, data/ghcnd-inventory.txt, data/ghcnd_all_files.txt
+    resources: tmpdir=/tmp
+
+[Tue Aug  6 18:26:38 2024]
+Finished job 3.
+7 of 7 steps (100%) done
+Complete log: .snakemake/log/2024-08-06T174108.142018.snakemake.log
