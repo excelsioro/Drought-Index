@@ -7,5 +7,6 @@ channels:
 dependencies:
  - r-base
  - r-tidyverse
+ - r-rmarkdown=2.27
  - snakemake=8.16.0
  - graphviz=11.0.0
