@@ -1,8 +1,10 @@
 ---
-title: Drought index for world
+title: "Drought Index for World"
 output: html_document
-github_repo: https://github.com/excelsioro/Drought-Index
+github_repo: "https://github.com/excelsioro/Drought-Index"
 ---
 
-![](C:/Users/js199/OneDrive\Desktop/Drought-Index/visuals/world_drought.png)
+![](/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/visuals/world_drought.png)
+
+
 

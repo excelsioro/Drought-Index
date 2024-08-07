@@ -1,0 +1,40 @@
+Script started on 2024-08-06 21:20:04-04:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="135" LINES="10"]
+[?2004h(base) ]0;hhssingh1122@Laptop: /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[01;32mhhssingh1122@Laptop[00m:[01;34m/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[00m$ [7mRscript -e "rmarkdown::render('Index.Rmd')"[27mRscript -e "rmarkdown::render('Index.Rmd')"
+[?2004lCommand 'Rscript' not found, but can be installed with:
+sudo apt install r-base-core
+[?2004h(base) ]0;hhssingh1122@Laptop: /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[01;32mhhssingh1122@Laptop[00m:[01;34m/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[00m$ [7mRscript -e "rmarkdown::render('Index.Rmd')"[27mRscript -e "rmarkdown::render('Index.Rmd')"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K -e "library(rmarkdown); render('Index.Rmd')"
+[?2004lCommand 'R' not found, but can be installed with:
+sudo apt install r-base-core
+[?2004h(base) ]0;hhssingh1122@Laptop: /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[01;32mhhssingh1122@Laptop[00m:[01;34m/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[00m$ activate conda f[Kdrought
+[?2004l
+ArgumentError: activate does not accept more than one argument:
+['conda', 'drought']
+
+
+[?2004h(base) ]0;hhssingh1122@Laptop: /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[01;32mhhssingh1122@Laptop[00m:[01;34m/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[00m$ conda activate c[Kdrought
+[?2004l[?2004h(drought) ]0;hhssingh1122@Laptop: /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[01;32mhhssingh1122@Laptop[00m:[01;34m/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index[00m$ [7mR -e "library(rmarkdown); render('Index.Rmd')"[27mR -e "library(rmarkdown); render('Index.Rmd')"
+[?2004l
+R version 4.3.3 (2024-02-29) -- "Angel Food Cake"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-conda-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(rmarkdown); render('Index.Rmd')
+[?25h
+
+processing file: Index.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |......................................................................| 100%                                                                                          
+output file: Index.knit.md
+
+/home/hhssingh1122/miniconda3/envs/drought/bin/pandoc +RTS -K512m -RTS Index.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output Index.html --lua-filter /home/hhssingh1122/miniconda3/envs/drought/lib/R/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /home/hhssingh1122/miniconda3/envs/drought/lib/R/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /home/hhssingh1122/miniconda3/envs/drought/lib/R/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /tmp/RtmpkhDUPP/rmarkdown-str90a42fc06a1.ht
