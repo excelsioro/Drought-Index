@@ -1,18 +1,15 @@
 name: drought
 channels:
- - conda-forge
- - base
- - bioconda
- - R
+  - conda-forge
+  - base
+  - bioconda
+  - R
 dependencies:
- - r-base
- - r-tidyverse
- - r-rmarkdown=2.27
- - snakemake=8.16.0
-<<<<<<< HEAD
- - r-maps
- - graphviz=11.0.0
-=======
- - graphviz=11.0.0
- - coreutils>=9.5
->>>>>>> 95c08bc26e130f618126be1036ff6835dfec150c
+  - r-base
+  - r-tidyverse
+  - r-rmarkdown=2.27
+  - snakemake=8.16.0
+  - r-maps
+  - graphviz=11.0.0
+  - coreutils>=9.5
+
