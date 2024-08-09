@@ -49,7 +49,7 @@ lat_long_prcp %>%
          z_score = if_else(z_score < -2, -2, z_score)) %>%
   ggplot(aes(x= longitude, y = latitude, fill = z_score)) +
         geom_map(data = world_map, aes(map_id = region),
-          map = world_map, fill = NA, color = "#d0d0af", size = 0.03,
+          map = world_map, fill = NA, color = "#fdfda9", linewidth = 0.08,
           inherit.aes = FALSE) +
         expand_limits(x = world_map$long, y = world_map$lat) +
         geom_tile() +
