@@ -28,5 +28,5 @@ body {
 ![](/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/visuals/world_drought.png)
 
 Last updated on `r today()`  
-Site [developed](`r rmarkdown::metadata$github_repo`) by [excelsioro](mailto:`r rmarkdown::metadata$email_address`)
+Site [developed](`r rmarkdown::metadata$github_repo`) by [Hardeep Singh](mailto:`r rmarkdown::metadata$email_address`).
 
