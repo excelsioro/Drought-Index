@@ -9,4 +9,5 @@ dependencies:
  - r-tidyverse
  - r-rmarkdown=2.27
  - snakemake=8.16.0
+ - r-maps
  - graphviz=11.0.0

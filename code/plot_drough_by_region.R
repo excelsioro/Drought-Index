@@ -3,6 +3,9 @@
 library(tidyverse)
 library(glue)
 library(lubridate)
+library(maps)
+
+
 prcp_data <- read_tsv("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_tidy.tsv.gz")
 
 station_data <- read_tsv("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_regions_years.tsv")
@@ -24,6 +27,10 @@ station_data <- read_tsv("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data
 end = format(today(), "%B %d")
 start = format(today() - 30, "%B %d")
 
+world_map = map_data("world") %>% filter(region != "Antarctica") 
+#%>% mutate(lat = round(lat), long = round(long))
+
+
 
 lat_long_prcp <- inner_join(prcp_data, station_data, by = "id") %>%
   filter((year != first_year & year != last_year) | year == 2022) %>% 
@@ -41,6 +48,10 @@ lat_long_prcp %>%
   mutate(z_score = if_else(z_score > 2, 2, z_score),
          z_score = if_else(z_score < -2, -2, z_score)) %>%
   ggplot(aes(x= longitude, y = latitude, fill = z_score)) +
+        geom_map(data = world_map, aes(map_id = region),
+          map = world_map, fill = NA, color = "#d0d0af", size = 0.03,
+          inherit.aes = FALSE) +
+        expand_limits(x = world_map$long, y = world_map$lat) +
         geom_tile() +
         coord_fixed() +
         scale_fill_gradient2(low = "#fc8d59", mid = "#ffffbf", high = "#67a9cf", midpoint = 0,
@@ -66,3 +77,10 @@ lat_long_prcp %>%
 #ggsave("C:/Users/js199/OneDrive/Desktop/Drought-Index/visuals/world_drought.png")
 
 ggsave("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/visuals/world_drought.png", width = 8, height = 4)
+
+
+ggplot(data = world_map, aes(x=long, y = lat, map_id = region)) +
+       geom_map(map = world_map, fill = NA, color = "white") +
+       coord_fixed() +
+       theme(panel.background = element_rect(fill = "black"),
+       plot.background = element_rect(fill = "black"))
