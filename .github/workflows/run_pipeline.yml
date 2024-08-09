@@ -21,6 +21,9 @@ jobs:
       - name: Get working directory
         run: |
           pwd
+      - name: Ensure bash script has execute permissions
+        run: |
+          chmod +x code/get_ghcnd_data.bash
       - name: Snakemake workflow
         uses: snakemake/snakemake-github-action@v1
         with:
