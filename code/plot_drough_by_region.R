@@ -6,9 +6,9 @@ library(lubridate)
 library(maps)
 
 
-prcp_data <- read_tsv("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_tidy.tsv.gz")
+prcp_data <- read_tsv("data/ghcnd_tidy.tsv.gz")
 
-station_data <- read_tsv("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/data/ghcnd_regions_years.tsv")
+station_data <- read_tsv("data/ghcnd_regions_years.tsv")
 
 
 
@@ -76,7 +76,7 @@ lat_long_prcp %>%
 
 #ggsave("C:/Users/js199/OneDrive/Desktop/Drought-Index/visuals/world_drought.png")
 
-ggsave("/mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/visuals/world_drought.png", width = 8, height = 4)
+ggsave("visuals/world_drought.png", width = 8, height = 4)
 
 
 ggplot(data = world_map, aes(x=long, y = lat, map_id = region)) +
