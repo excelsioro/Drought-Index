@@ -1,9 +1,7 @@
 name: Run Drought Index Workflow
 run-name: ${{ github.actor }} is running snakemake workflow 🚀
 on: [push]
-# schedule:
-#  - cron: '1 12 * * *'
- 
+
 jobs:
   Run-Drought-Index-Workflow:
     runs-on: ubuntu-latest
@@ -14,23 +12,52 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          ls
+          ls -la
       - name: Get working directory
         run: |
           pwd
       - name: Ensure bash script has execute permissions
         run: |
           chmod +x code/get_ghcnd_data.bash
+          # Repeat for other scripts if needed
+      - name: Verify data directory and network access
+        run: |
+          echo "Checking if data directory exists:"
+          ls -la
+          if [ ! -d "data" ]; then
+            echo "Data directory does not exist. Creating it now."
+            mkdir data
+          else
+            echo "Data directory exists."
+          fi
+          echo "Files in data directory:"
+          ls -la data/
+          
+          echo "Checking network access:"
+          curl -I https://www.ncei.noaa.gov/pub/data/ghcn/daily/
+          wget --spider https://www.ncei.noaa.gov/pub/data/ghcn/daily/
+      - name: Download data file
+        run: |
+          file="ghcnd_all.tar.gz"  # Replace with your file
+          if [ -f "data/$file" ]; then
+            echo "Removing existing file: data/$file"
+            rm data/$file
+          else
+            echo "File data/$file does not exist, skipping removal."
+          fi
+
+          echo "Downloading file: $file"
+          wget -P data/ https://www.ncei.noaa.gov/pub/data/ghcn/daily/$file
+          echo "Files in data directory after download:"
+          ls -la data/
       - name: Snakemake workflow
         uses: snakemake/snakemake-github-action@v1
         with:
           directory: '.'
           snakefile: 'Snakefile'
-          args: '--cores 1 --use-conda --conda-cleanup-pkgs cache'
-          stagein: '' # additional preliminary commands to run (can be multiline)
+          args: '--cores 1 --use-conda --conda-cleanup-pkgs cache --verbose'
       - name: Configure git on runner
         run: |
           git config --local user.email "noreply@github.com"
@@ -38,6 +65,6 @@ jobs:
       - name: Commit changes to repository
         run: |
           git add visuals/world_drought.png index.html
-          git commit -m "Today's rendering"
+          git commit -m "Today's rendering" || echo "No changes to commit"
           git push origin main
       - run: echo "🍏 This job's status is ${{ job.status }}."
