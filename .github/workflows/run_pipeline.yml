@@ -18,10 +18,14 @@ jobs:
       - name: Get working directory
         run: |
           pwd
-      - name: Ensure bash script has execute permissions
+      - name: Ensure bash scripts has execute permissions
         run: |
           chmod +x code/get_ghcnd_data.bash
-          # Repeat for other scripts if needed
+          chmod +x code/get_ghcnd_all_files.bash
+          chmod +x code/concatenate_dly.bash
+          chmod +x code/read_split_dly_files.R
+          chmod +x code/get_regions_years.R
+          chmod +x code/plot_drough_by_region.R
       - name: Verify data directory and network access
         run: |
           echo "Checking if data directory exists:"
