@@ -1,0 +1,46 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                       count
+----------------------  -------
+get_all_archive               1
+get_all_filenames             1
+get_inventory                 1
+get_regions_years             1
+get_station_data              1
+plot_drought_by_region        1
+render_index                  1
+summarize_dly_files           1
+targets                       1
+total                         9
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 09:43:38 2024]
+localrule get_all_archive:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd_all.tar.gz
+    jobid: 1
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+Terminating processes on user request, this might take some time.
+[Mon Aug 12 09:48:08 2024]
+Error in rule get_all_archive:
+    jobid: 1
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd_all.tar.gz
+    conda-env: /mnt/c/Users/js199/OneDrive/Desktop/Drought-Index/.snakemake/conda/9dd895870cbcabc8d10ef4aa8ea61256_
+    shell:
+        
+        code/get_ghcnd_data.bash ghcnd_all.tar.gz
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Complete log: .snakemake/log/2024-08-12T094337.947324.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,145 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                       count
+----------------------  -------
+get_all_archive               1
+get_all_filenames             1
+get_inventory                 1
+get_regions_years             1
+get_station_data              1
+plot_drought_by_region        1
+render_index                  1
+summarize_dly_files           1
+targets                       1
+total                         9
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 09:49:58 2024]
+localrule get_all_archive:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd_all.tar.gz
+    jobid: 1
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 09:53:29 2024]
+Finished job 1.
+1 of 9 steps (11%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 09:53:29 2024]
+localrule get_inventory:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd-inventory.txt
+    jobid: 3
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 09:53:31 2024]
+Finished job 3.
+2 of 9 steps (22%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 09:53:31 2024]
+localrule get_all_filenames:
+    input: code/get_ghcnd_all_files.bash, data/ghcnd_all.tar.gz
+    output: data/ghcnd_all_files.txt
+    jobid: 2
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 09:55:34 2024]
+Finished job 2.
+3 of 9 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 09:55:34 2024]
+localrule get_station_data:
+    input: code/get_ghcnd_data.bash
+    output: data/ghcnd-stations.txt
+    jobid: 4
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 09:55:35 2024]
+Finished job 4.
+4 of 9 steps (44%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 09:55:35 2024]
+localrule summarize_dly_files:
+    input: code/concatenate_dly.bash, code/read_split_dly_files.R, data/ghcnd_all.tar.gz
+    output: data/ghcnd_tidy.tsv.gz
+    jobid: 5
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 10:24:52 2024]
+Finished job 5.
+5 of 9 steps (56%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 10:24:52 2024]
+localrule get_regions_years:
+    input: code/get_regions_years.R, data/ghcnd-inventory.txt
+    output: data/ghcnd_regions_years.tsv
+    jobid: 6
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 10:24:56 2024]
+Finished job 6.
+6 of 9 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 10:24:56 2024]
+localrule plot_drought_by_region:
+    input: code/plot_drough_by_region.R, data/ghcnd_tidy.tsv.gz, data/ghcnd_regions_years.tsv
+    output: visuals/world_drought.png
+    jobid: 7
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 10:25:05 2024]
+Finished job 7.
+7 of 9 steps (78%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 10:25:05 2024]
+localrule render_index:
+    input: index.Rmd, visuals/world_drought.png
+    output: index.html
+    jobid: 8
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 10:25:07 2024]
+Finished job 8.
+8 of 9 steps (89%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Aug 12 10:25:07 2024]
+localrule targets:
+    input: data/ghcnd_all.tar.gz, data/ghcnd_all_files.txt, data/ghcnd-inventory.txt, data/ghcnd-stations.txt, data/ghcnd_tidy.tsv.gz, data/ghcnd_regions_years.tsv, visuals/world_drought.png, index.html
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/tmp
+
+[Mon Aug 12 10:25:07 2024]
+Finished job 0.
+9 of 9 steps (100%) done
+Complete log: .snakemake/log/2024-08-12T094958.414509.snakemake.log
